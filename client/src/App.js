@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
-import { fetchVents } from './store/slices/ventsSlice';
+import { fetchVents, clearSuccess, clearError } from './store/slices/ventsSlice';
 import Header from './components/Header';
 import VentForm from './components/VentForm';
 import VentFeed from './components/VentFeed';
@@ -9,11 +9,31 @@ import './App.css';
 
 function App() {
   const dispatch = useAppDispatch();
-  const { loading, error } = useAppSelector((state) => state.vents);
+  const { loading, error, successMessage } = useAppSelector((state) => state.vents);
 
   useEffect(() => {
     dispatch(fetchVents());
   }, [dispatch]);
+
+  // Auto-dismiss success message
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        dispatch(clearSuccess());
+      }, 4000); // 4 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage, dispatch]);
+
+  // Auto-dismiss error messages
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        dispatch(clearError());
+      }, 5000); // 5 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [error, dispatch]);
 
   // Format error message for display
   const getErrorMessage = () => {
@@ -49,6 +69,16 @@ function App() {
           </div>
           <div className="notification-message">
             {getErrorMessage()}
+          </div>
+        </div>
+      )}
+      {successMessage && (
+        <div className="success-notification">
+          <div className="notification-icon">
+            ✅
+          </div>
+          <div className="notification-message">
+            {successMessage}
           </div>
         </div>
       )}

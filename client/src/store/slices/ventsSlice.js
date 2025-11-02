@@ -76,10 +76,14 @@ const ventsSlice = createSlice({
     items: [],
     loading: false,
     error: null,
+    successMessage: null,
   },
   reducers: {
     clearError: (state) => {
       state.error = null;
+    },
+    clearSuccess: (state) => {
+      state.successMessage = null;
     },
   },
   extraReducers: (builder) => {
@@ -105,6 +109,7 @@ const ventsSlice = createSlice({
       .addCase(createVent.fulfilled, (state, action) => {
         state.loading = false;
         state.items.unshift(action.payload); // Add to beginning
+        state.successMessage = 'Your vent has been released. 💜';
       })
       .addCase(createVent.rejected, (state, action) => {
         state.loading = false;
@@ -120,6 +125,7 @@ const ventsSlice = createSlice({
         state.items = state.items.map((vent) =>
           vent._id === action.payload._id ? action.payload : vent
         );
+        state.successMessage = 'Your vent has been updated. ✏️';
       })
       .addCase(updateVent.rejected, (state, action) => {
         state.loading = false;
@@ -133,6 +139,7 @@ const ventsSlice = createSlice({
       .addCase(deleteVent.fulfilled, (state, action) => {
         state.loading = false;
         state.items = state.items.filter((vent) => vent._id !== action.payload);
+        state.successMessage = 'Your vent has been deleted. 🗑️';
       })
       .addCase(deleteVent.rejected, (state, action) => {
         state.loading = false;
@@ -141,6 +148,6 @@ const ventsSlice = createSlice({
   },
 });
 
-export const { clearError } = ventsSlice.actions;
+export const { clearError, clearSuccess } = ventsSlice.actions;
 export default ventsSlice.reducer;
 
