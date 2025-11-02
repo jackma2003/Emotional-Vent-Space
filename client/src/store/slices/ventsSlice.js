@@ -28,6 +28,18 @@ export const createVent = createAsyncThunk(
   }
 );
 
+export const updateVent = createAsyncThunk(
+  'vents/updateVent',
+  async ({ id, text }, { rejectWithValue }) => {
+    try {
+      const response = await axios.put(`${API_URL}/vents/${id}`, { text });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to update vent');
+    }
+  }
+);
+
 export const deleteVent = createAsyncThunk(
   'vents/deleteVent',
   async (id, { rejectWithValue }) => {
@@ -77,6 +89,21 @@ const ventsSlice = createSlice({
         state.items.unshift(action.payload); // Add to beginning
       })
       .addCase(createVent.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Update vent
+      .addCase(updateVent.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateVent.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = state.items.map((vent) =>
+          vent._id === action.payload._id ? action.payload : vent
+        );
+      })
+      .addCase(updateVent.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })

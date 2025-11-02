@@ -15,6 +15,7 @@ A safe, anonymous digital space where people can freely express their thoughts a
 
 ✅ **Anonymous Sharing** - No login required, completely anonymous  
 ✅ **Persistent Storage** - Messages saved in MongoDB database  
+✅ **Update & Delete** - Edit or remove your vents anytime  
 ✅ **Real-time Feed** - See your message appear instantly in the community feed  
 ✅ **Calming Design** - Beautiful, soothing UI with gradient backgrounds  
 ✅ **Responsive** - Works perfectly on desktop, tablet, and mobile devices  
@@ -160,6 +161,26 @@ Create a new vent message
 }
 ```
 
+### PUT /api/vents/:id
+Update a vent message by ID
+
+**Request Body:**
+```json
+{
+  "text": "Updated message here"
+}
+```
+
+**Response:**
+```json
+{
+  "_id": "64f1a2b3c4d5e6f7a8b9c0d1",
+  "text": "Updated message here",
+  "createdAt": "2024-01-01T12:00:00.000Z",
+  "updatedAt": "2024-01-01T12:30:00.000Z"
+}
+```
+
 ### DELETE /api/vents/:id
 Delete a vent message by ID
 
@@ -174,7 +195,7 @@ Delete a vent message by ID
 
 The app uses Redux Toolkit for state management:
 
-- **Async Thunks**: Handle API calls (`fetchVents`, `createVent`, `deleteVent`)
+- **Async Thunks**: Handle API calls (`fetchVents`, `createVent`, `updateVent`, `deleteVent`)
 - **Slices**: Manage vent state with loading and error handling
 - **Selectors**: Access state with typed hooks
 

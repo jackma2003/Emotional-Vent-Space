@@ -32,7 +32,33 @@ router.post('/', async (req, res) => {
   }
 });
 
-// DELETE /api/vents/:id - Delete a vent (optional feature)
+// PUT /api/vents/:id - Update a vent
+router.put('/:id', async (req, res) => {
+  try {
+    const { text } = req.body;
+
+    // Validation
+    if (!text || text.trim().length === 0) {
+      return res.status(400).json({ message: 'Text is required' });
+    }
+
+    const vent = await Vent.findByIdAndUpdate(
+      req.params.id,
+      { text: text.trim() },
+      { new: true, runValidators: true }
+    );
+    
+    if (!vent) {
+      return res.status(404).json({ message: 'Vent not found' });
+    }
+
+    res.json(vent);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating vent', error: error.message });
+  }
+});
+
+// DELETE /api/vents/:id - Delete a vent
 router.delete('/:id', async (req, res) => {
   try {
     const vent = await Vent.findByIdAndDelete(req.params.id);
