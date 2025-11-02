@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { createVent } from '../store/slices/ventsSlice';
