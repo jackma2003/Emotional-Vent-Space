@@ -48,7 +48,6 @@ A safe, anonymous digital space where people can freely express their thoughts a
 
 ```bash
 # Install dependencies
-cd nextjs-app
 npm install
 
 # Create environment file
@@ -67,31 +66,26 @@ Visit `http://localhost:3000` to see your app running!
 # Install Vercel CLI
 npm install -g vercel
 
-# Deploy from nextjs-app directory
-cd nextjs-app
+# Deploy
 vercel
 ```
 
 **Or** use the Vercel dashboard:
 1. Go to vercel.com
 2. Import your GitHub repository
-3. Set root directory to `nextjs-app`
-4. Add `MONGODB_URI` environment variable
-5. Deploy!
+3. Add `MONGODB_URI` environment variable
+4. Deploy!
 
 ## Project Structure
 
 ```
 emotional-vent-space/
-├── nextjs-app/           # Main Next.js application
-│   ├── pages/            # Pages and API routes
-│   ├── components/       # React components
-│   ├── store/            # Redux store and slices
-│   ├── lib/              # Utilities (MongoDB, moderation)
-│   ├── models/           # Mongoose models
-│   └── styles/           # Global CSS
-├── README.md             # This file
-└── package.json          # Root package.json
+├── pages/                # Pages and API routes
+├── components/           # React components
+├── store/                # Redux store and slices
+├── lib/                  # Utilities (MongoDB, moderation)
+├── models/               # Mongoose models
+└── styles/               # Global CSS
 ```
 
 ## Environment Variables
