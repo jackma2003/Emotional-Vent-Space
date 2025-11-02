@@ -16,6 +16,7 @@ A safe, anonymous digital space where people can freely express their thoughts a
 ✅ **Anonymous Sharing** - No login required, completely anonymous  
 ✅ **Persistent Storage** - Messages saved in MongoDB database  
 ✅ **Update & Delete** - Edit or remove your vents anytime  
+✅ **Content Moderation** - Automatic detection and blocking of harmful content  
 ✅ **Real-time Feed** - See your message appear instantly in the community feed  
 ✅ **Calming Design** - Beautiful, soothing UI with gradient backgrounds  
 ✅ **Responsive** - Works perfectly on desktop, tablet, and mobile devices  
@@ -199,6 +200,28 @@ The app uses Redux Toolkit for state management:
 - **Slices**: Manage vent state with loading and error handling
 - **Selectors**: Access state with typed hooks
 
+## Content Moderation
+
+The app includes automatic content moderation to maintain a safe environment:
+
+### What Gets Blocked
+- **Self-harm content**: Phrases related to suicide and self-harm
+- **Excessive caps**: Yelling/aggressive capitalization (>70% caps)
+- **Profanity**: Customizable word filters
+
+### How It Works
+- Content is checked before saving to the database
+- Blocked content returns a clear error message with reason
+- UI displays special moderation notifications (🚫 icon)
+
+### Configuration
+Edit `server/utils/moderation.js` to customize:
+- Add custom profane words
+- Modify harmful phrase patterns
+- Adjust thresholds
+
+See `server/utils/README.md` for detailed documentation.
+
 ## Production Build
 
 ### Build Frontend
@@ -224,9 +247,10 @@ This creates an optimized production build in `client/build/`
 - User authentication and private vents
 - Message reactions and responses
 - Message categories/tags
-- Text sentiment analysis
+- Advanced sentiment analysis
 - Real-time updates with Socket.io
-- Rate limiting and moderation tools
+- Machine learning-based moderation
+- Admin moderation panel
 - Export/import functionality
 
 ## Contributing

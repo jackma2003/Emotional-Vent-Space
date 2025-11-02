@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Vent = require('../models/Vent');
+const { checkForHarmfulContent } = require('../utils/moderation');
 
 // GET /api/vents - Get all vents
 router.get('/', async (req, res) => {
@@ -22,8 +23,21 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ message: 'Text is required' });
     }
 
+    const trimmedText = text.trim();
+
+    // Moderation check
+    const moderationResult = checkForHarmfulContent(trimmedText);
+    if (moderationResult.isBlocked) {
+      return res.status(400).json({
+        message: `Content blocked: ${moderationResult.reason}`,
+        reason: moderationResult.reason,
+        category: moderationResult.category,
+        blocked: true
+      });
+    }
+
     // Create new vent
-    const vent = new Vent({ text: text.trim() });
+    const vent = new Vent({ text: trimmedText });
     const savedVent = await vent.save();
 
     res.status(201).json(savedVent);
@@ -42,9 +56,22 @@ router.put('/:id', async (req, res) => {
       return res.status(400).json({ message: 'Text is required' });
     }
 
+    const trimmedText = text.trim();
+
+    // Moderation check
+    const moderationResult = checkForHarmfulContent(trimmedText);
+    if (moderationResult.isBlocked) {
+      return res.status(400).json({
+        message: `Content blocked: ${moderationResult.reason}`,
+        reason: moderationResult.reason,
+        category: moderationResult.category,
+        blocked: true
+      });
+    }
+
     const vent = await Vent.findByIdAndUpdate(
       req.params.id,
-      { text: text.trim() },
+      { text: trimmedText },
       { new: true, runValidators: true }
     );
     

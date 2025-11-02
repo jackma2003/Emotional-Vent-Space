@@ -23,6 +23,15 @@ export const createVent = createAsyncThunk(
       const response = await axios.post(`${API_URL}/vents`, { text });
       return response.data;
     } catch (error) {
+      // Handle moderation blocks with more context
+      if (error.response?.data?.blocked) {
+        return rejectWithValue({
+          message: error.response.data.message,
+          reason: error.response.data.reason,
+          category: error.response.data.category,
+          blocked: true
+        });
+      }
       return rejectWithValue(error.response?.data?.message || 'Failed to create vent');
     }
   }
@@ -35,6 +44,15 @@ export const updateVent = createAsyncThunk(
       const response = await axios.put(`${API_URL}/vents/${id}`, { text });
       return response.data;
     } catch (error) {
+      // Handle moderation blocks with more context
+      if (error.response?.data?.blocked) {
+        return rejectWithValue({
+          message: error.response.data.message,
+          reason: error.response.data.reason,
+          category: error.response.data.category,
+          blocked: true
+        });
+      }
       return rejectWithValue(error.response?.data?.message || 'Failed to update vent');
     }
   }

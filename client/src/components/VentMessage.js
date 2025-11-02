@@ -5,7 +5,7 @@ import './VentMessage.css';
 
 const VentMessage = ({ vent }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editText, setEditText] = useState(vent.text);
+  const [editText, setEditText] = useState('');
   const dispatch = useAppDispatch();
 
   const formatTimestamp = (timestamp) => {
@@ -36,8 +36,8 @@ const VentMessage = ({ vent }) => {
   };
 
   const handleEdit = () => {
-    setIsEditing(true);
     setEditText(vent.text);
+    setIsEditing(true);
   };
 
   const handleSave = async () => {

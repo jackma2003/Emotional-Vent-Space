@@ -15,6 +15,20 @@ function App() {
     dispatch(fetchVents());
   }, [dispatch]);
 
+  // Format error message for display
+  const getErrorMessage = () => {
+    if (typeof error === 'object' && error !== null && error.message) {
+      return error.message;
+    }
+    if (typeof error === 'string') {
+      return error;
+    }
+    return 'An error occurred';
+  };
+
+  // Check if error is a moderation block
+  const isModerationError = typeof error === 'object' && error !== null && error.blocked;
+
   return (
     <div className="container">
       <Header />
@@ -29,8 +43,13 @@ function App() {
         </div>
       )}
       {error && (
-        <div className="error-notification">
-          {error}
+        <div className={isModerationError ? 'moderation-notification' : 'error-notification'}>
+          <div className="notification-icon">
+            {isModerationError ? '🚫' : '⚠️'}
+          </div>
+          <div className="notification-message">
+            {getErrorMessage()}
+          </div>
         </div>
       )}
     </div>

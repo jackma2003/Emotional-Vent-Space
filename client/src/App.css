@@ -112,7 +112,8 @@ section {
 }
 
 /* Error notification */
-.error-notification {
+.error-notification,
+.moderation-notification {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -123,6 +124,25 @@ section {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 1000;
   animation: slideInRight 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 400px;
+}
+
+.moderation-notification {
+  background: #ff6b35;
+}
+
+.notification-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.notification-message {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 @keyframes slideInRight {
