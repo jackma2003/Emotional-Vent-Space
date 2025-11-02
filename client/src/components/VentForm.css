@@ -4,9 +4,14 @@
   gap: 15px;
 }
 
+.textarea-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .vent-form textarea {
   width: 100%;
-  padding: 20px;
+  padding: 20px 50px 20px 20px;
   border: 2px solid #e0e0e0;
   border-radius: 12px;
   font-size: 1rem;
@@ -21,6 +26,81 @@
   border-color: #667eea;
   background: white;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.emoji-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+}
+
+.emoji-btn:hover {
+  opacity: 1;
+  background: rgba(102, 126, 234, 0.1);
+  transform: scale(1.1);
+}
+
+.emoji-btn:active {
+  transform: scale(0.95);
+}
+
+.emoji-picker {
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 15px;
+  animation: slideDown 0.2s ease-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  max-width: 100%;
+}
+
+.emoji-option {
+  background: none;
+  border: 2px solid transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emoji-option:hover {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: #667eea;
+  transform: scale(1.2);
+}
+
+.emoji-option:active {
+  transform: scale(1.05);
 }
 
 .submit-btn {
@@ -51,3 +131,13 @@
   transform: none;
 }
 
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .emoji-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  
+  .vent-form textarea {
+    padding: 20px 50px 20px 20px;
+  }
+}
