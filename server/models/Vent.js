@@ -5,6 +5,11 @@ const ventSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true
+  },
+  hearts: {
+    type: Number,
+    default: 0,
+    min: 0
   }
 }, {
   timestamps: true // Automatically creates createdAt and updatedAt fields

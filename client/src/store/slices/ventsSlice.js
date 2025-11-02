@@ -70,6 +70,18 @@ export const deleteVent = createAsyncThunk(
   }
 );
 
+export const heartVent = createAsyncThunk(
+  'vents/heartVent',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(`${API_URL}/vents/${id}/heart`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.message || 'Failed to heart vent');
+    }
+  }
+);
+
 const ventsSlice = createSlice({
   name: 'vents',
   initialState: {
@@ -144,6 +156,12 @@ const ventsSlice = createSlice({
       .addCase(deleteVent.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      // Heart vent
+      .addCase(heartVent.fulfilled, (state, action) => {
+        state.items = state.items.map((vent) =>
+          vent._id === action.payload._id ? action.payload : vent
+        );
       });
   },
 });

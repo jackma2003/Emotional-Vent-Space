@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from '../hooks/reduxHooks';
-import { updateVent, deleteVent } from '../store/slices/ventsSlice';
+import { updateVent, deleteVent, heartVent } from '../store/slices/ventsSlice';
 import './VentMessage.css';
 
 const VentMessage = ({ vent }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState('');
+  const [isHearted, setIsHearted] = useState(false);
   const dispatch = useAppDispatch();
 
   const formatTimestamp = (timestamp) => {
@@ -59,6 +60,13 @@ const VentMessage = ({ vent }) => {
     }
   };
 
+  const handleHeart = async () => {
+    if (!isHearted) {
+      setIsHearted(true);
+      await dispatch(heartVent(vent._id));
+    }
+  };
+
   return (
     <div className="vent-message">
       <div className="vent-message-actions">
@@ -91,7 +99,17 @@ const VentMessage = ({ vent }) => {
         <div className="vent-message-content">{vent.text}</div>
       )}
 
-      <div className="vent-message-time">{formatTimestamp(vent.createdAt)}</div>
+      <div className="vent-message-footer">
+        <button 
+          onClick={handleHeart} 
+          className={`heart-btn ${isHearted ? 'hearted' : ''}`}
+          disabled={isHearted}
+        >
+          <span className="heart-icon">{isHearted ? '❤️' : '🤍'}</span>
+          <span className="heart-count">{vent.hearts || 0}</span>
+        </button>
+        <div className="vent-message-time">{formatTimestamp(vent.createdAt)}</div>
+      </div>
     </div>
   );
 };

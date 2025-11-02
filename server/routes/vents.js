@@ -85,6 +85,25 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// PATCH /api/vents/:id/heart - Add a heart to a vent
+router.patch('/:id/heart', async (req, res) => {
+  try {
+    const vent = await Vent.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { hearts: 1 } },
+      { new: true }
+    );
+    
+    if (!vent) {
+      return res.status(404).json({ message: 'Vent not found' });
+    }
+
+    res.json(vent);
+  } catch (error) {
+    res.status(500).json({ message: 'Error adding heart', error: error.message });
+  }
+});
+
 // DELETE /api/vents/:id - Delete a vent
 router.delete('/:id', async (req, res) => {
   try {
