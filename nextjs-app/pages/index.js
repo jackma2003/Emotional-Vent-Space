@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from './hooks/reduxHooks';
-import { fetchVents, clearSuccess, clearError } from './store/slices/ventsSlice';
-import Header from './components/Header';
-import VentForm from './components/VentForm';
-import VentFeed from './components/VentFeed';
-import Footer from './components/Footer';
-import './App.css';
+'use client';
 
-function App() {
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { fetchVents, clearSuccess, clearError } from '../store/slices/ventsSlice';
+import Header from '../components/Header';
+import VentForm from '../components/VentForm';
+import VentFeed from '../components/VentFeed';
+import Footer from '../components/Footer';
+
+export default function Home() {
   const dispatch = useAppDispatch();
   const { loading, error, successMessage } = useAppSelector((state) => state.vents);
 
@@ -85,6 +86,4 @@ function App() {
     </div>
   );
 }
-
-export default App;
 

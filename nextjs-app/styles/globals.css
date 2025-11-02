@@ -29,10 +29,6 @@ body {
   line-height: 1.6;
 }
 
-#root {
-  min-height: 100vh;
-}
-
 .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -79,7 +75,6 @@ section {
   letter-spacing: -0.02em;
 }
 
-/* Responsive Design */
 @media (min-width: 768px) {
   .content-wrapper {
     grid-template-columns: 1fr 1fr;
@@ -120,7 +115,6 @@ section {
   }
 }
 
-/* Loading overlay */
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -168,7 +162,6 @@ section {
   100% { transform: rotate(360deg); }
 }
 
-/* Error notification */
 .error-notification,
 .moderation-notification,
 .success-notification {
@@ -237,7 +230,6 @@ section {
   }
 }
 
-/* Add a subtle pulse for success messages */
 @keyframes pulse {
   0%, 100% {
     box-shadow: 0 8px 32px var(--shadow-medium), inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -247,7 +239,6 @@ section {
   }
 }
 
-/* Responsive notifications */
 @media (max-width: 480px) {
   .error-notification,
   .moderation-notification,
@@ -259,3 +250,4 @@ section {
     padding: 16px 20px;
   }
 }
+

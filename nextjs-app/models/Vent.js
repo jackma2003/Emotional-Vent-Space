@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const ventSchema = new mongoose.Schema({
   text: {
@@ -15,5 +15,7 @@ const ventSchema = new mongoose.Schema({
   timestamps: true // Automatically creates createdAt and updatedAt fields
 });
 
-module.exports = mongoose.model('Vent', ventSchema);
+const Vent = mongoose.models.Vent || mongoose.model('Vent', ventSchema);
+
+export default Vent;
 

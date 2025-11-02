@@ -1,0 +1,1 @@
+MONGODB_URI=mongodb+srv://jackma2003:jiahaoma9295009232@cluster0.u9twuyw.mongodb.net/emotional-vent-space?retryWrites=true&w=majority

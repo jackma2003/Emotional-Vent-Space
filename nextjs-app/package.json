@@ -1,0 +1,26 @@
+{
+  "name": "emotional-vent-space-nextjs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.7",
+    "axios": "^1.6.2",
+    "cors": "^2.8.5",
+    "mongoose": "^7.6.3",
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.3"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "^14.0.0"
+  }
+}
+

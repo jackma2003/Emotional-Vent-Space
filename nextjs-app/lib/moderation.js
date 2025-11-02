@@ -34,7 +34,7 @@ const harmfulPatterns = [
  * @param {string} text - The text to check
  * @returns {Object} - { isBlocked: boolean, reason: string, category: string }
  */
-function checkForHarmfulContent(text) {
+export function checkForHarmfulContent(text) {
   const lowerText = text.toLowerCase();
   
   // Check for explicit profanity
@@ -81,7 +81,7 @@ function checkForHarmfulContent(text) {
  * @param {string} text - The text to check
  * @returns {Object} - { hasWarning: boolean, message: string }
  */
-function checkForWarnings(text) {
+export function checkForWarnings(text) {
   const lowerText = text.toLowerCase();
   
   // Words that might need caution
@@ -105,9 +105,4 @@ function checkForWarnings(text) {
     message: null
   };
 }
-
-module.exports = {
-  checkForHarmfulContent,
-  checkForWarnings
-};
 
