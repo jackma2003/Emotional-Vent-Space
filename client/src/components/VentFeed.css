@@ -1,0 +1,32 @@
+.vent-feed {
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  padding: 40px 20px;
+}
+
+/* Custom Scrollbar */
+.vent-feed::-webkit-scrollbar {
+  width: 8px;
+}
+
+.vent-feed::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.vent-feed::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 10px;
+}
+
+.vent-feed::-webkit-scrollbar-thumb:hover {
+  background: #764ba2;
+}
+
