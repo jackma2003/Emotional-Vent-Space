@@ -1,32 +1,48 @@
 .vent-feed {
-  max-height: 600px;
+  max-height: 650px;
   overflow-y: auto;
-  padding-right: 10px;
+  padding-right: 12px;
+  padding-top: 4px;
 }
 
 .empty-state {
   text-align: center;
-  color: #999;
+  color: #a4b8c8;
   font-style: italic;
-  padding: 40px 20px;
+  padding: 50px 20px;
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
 }
 
 /* Custom Scrollbar */
 .vent-feed::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 .vent-feed::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f0f5f8;
   border-radius: 10px;
 }
 
 .vent-feed::-webkit-scrollbar-thumb {
-  background: #667eea;
+  background: #b8d4db;
   border-radius: 10px;
+  transition: background 0.3s ease;
 }
 
 .vent-feed::-webkit-scrollbar-thumb:hover {
-  background: #764ba2;
+  background: #7fb8c4;
 }
 
+/* Responsive scrollbar */
+@media (max-width: 600px) {
+  .vent-feed {
+    max-height: 500px;
+  }
+  
+  .empty-state {
+    padding: 40px 20px;
+    font-size: 0.95rem;
+  }
+}
