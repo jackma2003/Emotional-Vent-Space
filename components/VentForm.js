@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { createVent } from '../store/slices/ventsSlice';
-import './VentForm.css';
 
 const VentForm = () => {
   const [text, setText] = useState('');

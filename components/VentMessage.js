@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { updateVent, deleteVent, heartVent } from '../store/slices/ventsSlice';
-import './VentMessage.css';
 
 const VentMessage = ({ vent }) => {
   const [isEditing, setIsEditing] = useState(false);

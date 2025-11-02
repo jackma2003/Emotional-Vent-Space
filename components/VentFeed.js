@@ -3,7 +3,6 @@
 import React from 'react';
 import { useAppSelector } from '../hooks/reduxHooks';
 import VentMessage from './VentMessage';
-import './VentFeed.css';
 
 const VentFeed = () => {
   const { items } = useAppSelector((state) => state.vents);
